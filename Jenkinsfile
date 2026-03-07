@@ -23,7 +23,7 @@ tools {
         stage('Start application and Run Tests') {
             steps {
                 script {
-                    sh 'start /b npm start'  
+                    sh 'npm start'  
                 }
             }
         }
