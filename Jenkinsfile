@@ -1,14 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_VERSION = '18.x'
-    }
-
-    tools {
-        nodejs "${NODE_VERSION}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -19,9 +11,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                
-             bat 'npm install'
-                
+                    bat 'npm install'
+                }
             }
         }
 
@@ -38,7 +29,7 @@ pipeline {
 
     post {
         always {
-           echo 'CI pipeline completed.'
+            echo 'CI pipeline completed.'
         }
     }
 }
