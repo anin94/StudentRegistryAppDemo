@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+tools {
+    nodejs 'NodeJS'
+}
+
     stages {
         stage('Checkout') {
             steps {
@@ -19,9 +23,15 @@ pipeline {
         stage('Start application and Run Tests') {
             steps {
                 script {
-                    sh 'npm start &'
-                    sh 'wait-on localhost:8090' // Wait for the application to start
-                    sh 'npm test'
+                    sh 'start /b npm start'  
+                }
+            }
+        }
+
+         stage('Run Tests') {
+            steps {
+                script {
+                    sh 'start npm test'  
                 }
             }
         }
