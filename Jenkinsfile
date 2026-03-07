@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-tools {
-    nodejs 'NodeJS'
-}
+    tools {
+        nodejs 'NodeJS'
+    }
 
     stages {
         stage('Checkout') {
@@ -14,25 +14,21 @@ tools {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
 
-        stage('Start application and Run Tests') {
+        stage('Start Application') {
             steps {
-                script {
-                    sh 'npm start'  
-                }
+                // Стартираме приложението във фонов режим и изчакваме да се стартира
+                sh 'nohup npm start &'
+                sh 'sleep 5' // изчакваме 5 секунди да се стартира сървъра
             }
         }
 
-         stage('Run Tests') {
+        stage('Run Tests') {
             steps {
-                script {
-                    sh 'start npm test'  
-                }
+                sh 'npm test'
             }
         }
     }
