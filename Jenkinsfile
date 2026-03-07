@@ -11,7 +11,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    bat 'npm install'
+                    sh 'npm install'
                 }
             }
         }
@@ -19,9 +19,9 @@ pipeline {
         stage('Start application and Run Tests') {
             steps {
                 script {
-                    bat 'npm start &'
-                    bat 'wait-on localhost:8090' // Wait for the application to start
-                    bat 'npm test'
+                    sh 'npm start &'
+                    sh 'wait-on localhost:8090' // Wait for the application to start
+                    sh 'npm test'
                 }
             }
         }
